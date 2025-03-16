@@ -123,7 +123,14 @@
 
 **Response:** `204 No Content`
 
-## Filtered Dashboard
+## Dashboard
+
+### View Dashboard
+**Route:** `GET /`
+
+**Description:** View the dashboard.
+
+**Response:** HTML page with the dashboard.
 
 ### View Dashboard Filtered by Topic
 **Route:** `GET /filter/{topic}`
