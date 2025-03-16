@@ -68,13 +68,7 @@ php artisan migrate
 php artisan serve
 ```
 
-2. Compile the frontend assets:
-
-```sh
-npm run dev
-```
-
-3. Open your browser and navigate to `http://localhost:8000`.
+2. Open your browser and navigate to `http://localhost:8000`.
 
 ## API Routes
 
