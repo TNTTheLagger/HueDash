@@ -26,6 +26,8 @@
             align-items: center;
             height: 100vh;
             background-color: #f0f0f0;
+            overflow: hidden;
+            /* Prevent body from scrolling */
         }
 
         .container {
@@ -35,6 +37,12 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-height: 90vh;
+            /* Set a max height for the container */
+            overflow-y: auto;
+            /* Enable vertical scrolling */
+            overflow-x: hidden;
+            /* Prevent horizontal scrolling */
         }
 
         .form-group {
