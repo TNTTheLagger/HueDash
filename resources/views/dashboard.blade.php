@@ -29,7 +29,7 @@
         .dashboard {
             column-count: 4;
             column-gap: 5px;
-            width: 100%;
+            width: 95%;
             padding-top: 20px;
             height: 100%;
         }
