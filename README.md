@@ -70,7 +70,7 @@ php artisan serve
 
 2. Open your browser and navigate to `http://localhost:8000`.
 3. To manage the cards navigate to `http://localhost:8000/manage-cards`.
-4. Further info about the routes in the [API documentation](docs/routes.md)
+4. Further info about the routes in the [API documentation](docs/routes.md).
 
 ## API Routes
 
