@@ -68,7 +68,9 @@ php artisan migrate
 php artisan serve
 ```
 
-2. Open your browser and navigate to `http://localhost:8000`.
+2. Open your browser and navigate to [`http://localhost:8000`](http://localhost:8000) to view the cards.
+3. To manage the cards navigate to [`http://localhost:8000/manage-cards`](http://localhost:8000/manage-cards).
+4. Further info about the routes in the [API documentation](docs/routes.md).
 
 ## API Routes
 
