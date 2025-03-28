@@ -24,6 +24,10 @@
             height: 100vh;
             overflow: hidden;
             position: relative;
+            background-color: black;
+            /* Set background to black */
+            color: white;
+            /* Set text color to white */
         }
 
         .dashboard {
@@ -56,6 +60,10 @@
             /* Ensure text wraps */
             white-space: normal;
             /* Ensure text wraps */
+            color: white;
+            /* Ensure card text is readable */
+            min-width: 250px;
+            /* Set minimum width for cards */
         }
 
         .card.show {
@@ -71,10 +79,21 @@
         .card-header {
             font-weight: bold;
             margin-bottom: 5px;
+            overflow-wrap: break-word;
+            position: relative;
+        }
+
+        .card-topic {
+            position: absolute;
+            top: 0;
+            right: 0;
+            font-size: 10px;
+            color: white;
         }
 
         .card-body {
             font-size: 14px;
+            overflow-wrap: break-word;
         }
 
         .urgent-high {
@@ -111,12 +130,25 @@
             opacity: 1;
         }
 
-        .card-header {
-            overflow-wrap: break-word;
+        @media (max-width: 1200px) {
+            .dashboard {
+                column-count: 3;
+                /* Adjust columns for smaller screens */
+            }
         }
 
-        .card-body {
-            overflow-wrap: break-word;
+        @media (max-width: 900px) {
+            .dashboard {
+                column-count: 2;
+                /* Adjust columns for smaller screens */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dashboard {
+                column-count: 1;
+                /* Adjust columns for smaller screens */
+            }
         }
     </style>
 
@@ -142,34 +174,27 @@
                 errorOverlay.classList.remove('show');
 
                 const newCards = {};
-                data.filter(card => !card.topic) // Filter out cards with a topic
-                    .sort((a, b) => {
-                        const priorityOrder = {
-                            'high': 1,
-                            'medium': 2,
-                            'low': 3
-                        };
-                        const aPriority = priorityOrder[a.urgency?.toLowerCase()] || 4;
-                        const bPriority = priorityOrder[b.urgency?.toLowerCase()] || 4;
-                        return aPriority - bPriority;
-                    }).forEach(card => {
-                        newCards[card.id] = card;
-                        if (!existingCards[card.id]) {
-                            const cardElement = document.createElement('div');
-                            cardElement.classList.add('card');
-                            cardElement.setAttribute('data-id', card.id);
-                            if (card.urgency) {
-                                cardElement.classList.add(`urgent-${card.urgency.toLowerCase()}`);
-                            }
+                data.forEach(card => {
+                    newCards[card.id] = card;
+                    if (!existingCards[card.id]) {
+                        const cardElement = document.createElement('div');
+                        cardElement.classList.add('card');
+                        cardElement.setAttribute('data-id', card.id);
+                        if (card.urgency) {
+                            cardElement.classList.add(`urgent-${card.urgency.toLowerCase()}`);
+                        }
 
-                            cardElement.innerHTML = `
-                                <div class="card-header">${card.title}</div>
+                        cardElement.innerHTML = `
+                                <div class="card-header">
+                                    ${card.title}
+                                    <span class="card-topic">${card.topic ? card.topic.name : ''}</span>
+                                </div>
                                 <div class="card-body">${card.body}</div>
                             `;
-                            dashboard.appendChild(cardElement);
-                            setTimeout(() => cardElement.classList.add('show'), 10);
-                        }
-                    });
+                        dashboard.appendChild(cardElement);
+                        setTimeout(() => cardElement.classList.add('show'), 10);
+                    }
+                });
 
                 // Remove cards that are no longer in the new data
                 Object.keys(existingCards).forEach(id => {

@@ -13,11 +13,9 @@ Route::get('/manage-cards', function () {
 
 Route::get('/topics', [CardController::class, 'getTopics']);
 Route::post('/topics', [CardController::class, 'storeTopic']);
-Route::delete('/topics/{id}', [CardController::class, 'destroyTopic']);
+Route::delete(uri: '/topics/{id}', [CardController::class, 'destroyTopic']);
 
 Route::get('/cards', [CardController::class, 'index']);
-Route::get('/filter/{topic}', function ($topic) {
-    return view('dashboard', ['topic' => $topic]);
-});
+Route::get('/filter/{topic}', [CardController::class, 'filterByTopic']);
 Route::post('/cards', [CardController::class, 'store']);
 Route::delete('/cards/{id}', [CardController::class, 'destroy']);

@@ -21,7 +21,7 @@ class CardController extends Controller
             }
         }
 
-        $cards = $query->get();
+        $cards = $query->with('topic')->get(); // Include topic relationship
         return response()->json($cards);
     }
 
@@ -73,5 +73,14 @@ class CardController extends Controller
         $topic = Topic::findOrFail($id);
         $topic->delete();
         return response()->json(null, 204);
+    }
+
+    public function filterByTopic($topicName)
+    {
+        $topic = Topic::where('name', $topicName)->first();
+        if (! $topic) {
+            return view('error', ['message' => 'No topic found']);
+        }
+        return view('dashboard', ['topic' => $topicName]);
     }
 }
